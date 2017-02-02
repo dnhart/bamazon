@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/dnhart/bamazon#readme",
   "dependencies": {
+    "cli-table": "^0.3.1",
     "colors": "^1.1.2",
     "inquirer": "^3.0.1",
     "mysql": "^2.13.0",
