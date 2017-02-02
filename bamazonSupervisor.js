@@ -126,7 +126,9 @@ var totalSales = function(){
 					var total = res[i].Total;
 					if (total===null){
 						total=0;
-					};
+					}else{
+						total=total.toFixed(2);
+					}
 
 				table.push([res[i].department_name, "$"+total]);
 					// console.log(department, total);
@@ -161,6 +163,8 @@ var wholesaleOrderTotal = function(){
 					var total = res[i].Total;
 					if (total===null){
 						total=0;
+					}else{
+						total=total.toFixed(2);
 					};
 
 				table.push([res[i].department_name, "$"+total]);
@@ -198,12 +202,17 @@ connection.query(query, function(err, res){
 					var salesTotal = res[i].salesTotal;
 					if (wholeTotal===null){
 						wholeTotal=0;
+					}else{
+						wholeTotal=wholeTotal.toFixed(2);
 					};
 					if (salesTotal===null){
 						salesTotal=0;
+					}else{
+						salesTotal=salesTotal.toFixed(2);
 					};
 
 					var net = salesTotal-wholeTotal;
+					net = net.toFixed(2);
 
 				table.push([res[i].department_name, "$"+wholeTotal, "$"+salesTotal, "$"+net]);
 					// console.log(department, total);

@@ -102,7 +102,10 @@ var lowInventory = function(){
 		} else {
 			for (var i = 0; i<res.length; i++) {
 
-				table.push([res[i].item_id, res[i].stock_quantity, "$"+res[i].wholesale,"$"+res[i].retail, res[i].product_name, res[i].department_name]);
+				var retail=res[i].retail.toFixed(2);
+				var wholesale = res[i].wholesale.toFixed(2);
+
+				table.push([res[i].item_id, res[i].stock_quantity, "$"+wholesale,"$"+retail, res[i].product_name, res[i].department_name]);
 				// console.log("ID: "+res[i].item_id+" | Inventory: "+res[i].stock_quantity+" | Price: $"+res[i].price+" | Product Name: "+res[i].product_name+" | Department: "+res[i].department_name);
 			}; //end for loop
 			console.log("\r\n"+table.toString());
@@ -271,9 +274,13 @@ var newProduct = function () {
 			//console.log(results);
 			var productName=results.productName;
 			var department=results.department;
-			var retailPrice=results.retailPrice;
-			var wholesalePrice=results.wholesalePrice;
+			var retailPrice=results.retailPrice
+			retailPrice=Number(retailPrice).toFixed(2);
+			var wholesalePrice=results.wholesalePrice
+			wholesalePrice=Number(wholesalePrice).toFixed(2);
 			var startInventory=results.startInventory;
+			startInventory=Number(startInventory);
+			var wholesaleTotal=wholesalePrice*startInventory;
 
 			connection.query("INSERT INTO products SET ?",{
 				product_name: productName,
@@ -281,6 +288,7 @@ var newProduct = function () {
    				retail: retailPrice,
    				wholesale: wholesalePrice,
     			stock_quantity: startInventory,
+
 
 			}, function (err, results){
 					if (err){
@@ -297,11 +305,29 @@ var newProduct = function () {
 			    			{'Starting Inventory': colors.yellow(startInventory)}
 							);
 						console.log(table.toString());
+				
+
+			var itemID = results.insertId;
+			connection.query("INSERT INTO wholesale SET ?",{
+				item_id: itemID,
+				product_name: productName,
+    			wholesale_quantity: startInventory,
+    			wholesale_total: wholesaleTotal
+
+			}, function (err, results){
+					if (err){
+						console.log(err);
+					} else { 
+						console.log("Your new inventory order has been logged.");
 						managerPortal();
 					}; //end else
-			});//END connection
+			});//END connection into wholesale
+
 		};//end else
-	});//end prompt
+
+	});//end connection into products
+	}; //end else
+	}); //end prompt
 
 };//end newProduct
 
