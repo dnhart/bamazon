@@ -1,0 +1,31 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "basic inventory system",
+  "main": "bamazon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnhart/bamazon.git"
+  },
+  "keywords": [
+    "inventory",
+    "cart",
+    "buy",
+    "sell"
+  ],
+  "author": "D'Ann Hart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnhart/bamazon/issues"
+  },
+  "homepage": "https://github.com/dnhart/bamazon#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "inquirer": "^3.0.1",
+    "mysql": "^2.13.0",
+    "prompt": "^1.0.0"
+  }
+}
