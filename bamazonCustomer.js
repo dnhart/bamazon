@@ -72,7 +72,7 @@ var placeOrder = function(){
   var schema = {
     properties: {
       ProductID: {
-      	description: 'Please enter the Product ID:',
+      	description: 'Please enter the Product ID',
         pattern: /^[0-9]+$/,
         message: 'Please enter only the number of the Product ID.',
         required: true
